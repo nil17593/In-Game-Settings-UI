@@ -10,20 +10,8 @@ namespace AppsoleutCodersLLP.SettingUI
         [Header("Settings Toggles")]
         [SerializeField] private Toggle [] settingToggles;
 
-        //[SerializeField] private Toggle privacySettingsToggle;
-        //[SerializeField] private Toggle graphicsSettingToggle;
-        //[SerializeField] private Toggle languageSettingsToggle;
-        //[SerializeField] private Toggle controlSettingsToggle;
-
         [Header("Graphics Presets Toggle")]
-
-
-        [SerializeField] private Toggle automaticGraphicsPresetToggle;
-        [SerializeField] private Toggle lowGraphicsPresetToggle;
-        [SerializeField] private Toggle mediumGraphicsPresetToggle;
-        [SerializeField] private Toggle highGraphicsPresetToggle;
-        [SerializeField] private Toggle advancedGraphicsPresetToggle;
-        [SerializeField] private Toggle customGraphicsPresetToggle;
+        [SerializeField] private Toggle[] graphicsPresetToggles;
 
         [Header("Shadow Toggles")]
         [SerializeField] private Toggle lowShadowToggle;
@@ -78,9 +66,19 @@ namespace AppsoleutCodersLLP.SettingUI
             control,
             language,
             graphics,
-            privacy
-                        
+            privacy                       
         }
+
+        public enum PresetType
+        {
+            Automatic,
+            Advanced,
+            High,
+            Medium,
+            Low,
+            Custom
+        }
+
         private void Start()
         {
             //load respective settings panels on toggles value change
@@ -89,17 +87,15 @@ namespace AppsoleutCodersLLP.SettingUI
             settingToggles[(int)SettingToggleType.language].onValueChanged.AddListener(LoadLanguageSettings);
             settingToggles[(int)SettingToggleType.control].onValueChanged.AddListener(LoadControlSettings);
 
-            
+
 
             //load different graphics panels for different presets
-            automaticGraphicsPresetToggle.onValueChanged.AddListener(LoadGraphicsForAutomaticPreset);
-            lowGraphicsPresetToggle.onValueChanged.AddListener(LoadGraphicsForLowPreset);
-            mediumGraphicsPresetToggle.onValueChanged.AddListener(LoadGraphicsForMediumPreset);
-            highGraphicsPresetToggle.onValueChanged.AddListener(LoadGraphicsForHighPreset);
-            advancedGraphicsPresetToggle.onValueChanged.AddListener(LoadGraphicsForAdvancedPreset);
-            customGraphicsPresetToggle.onValueChanged.AddListener(LoadGraphicsForCustomPreset);
-
-            //ChangeSliderValue(sliderPercentage);
+            graphicsPresetToggles[(int)PresetType.Automatic].onValueChanged.AddListener(LoadGraphicsForAutomaticPreset);
+            graphicsPresetToggles[(int)PresetType.Advanced].onValueChanged.AddListener(LoadGraphicsForAdvancedPreset);
+            graphicsPresetToggles[(int)PresetType.High].onValueChanged.AddListener(LoadGraphicsForHighPreset);
+            graphicsPresetToggles[(int)PresetType.Medium].onValueChanged.AddListener(LoadGraphicsForMediumPreset);
+            graphicsPresetToggles[(int)PresetType.Low].onValueChanged.AddListener(LoadGraphicsForLowPreset);
+            graphicsPresetToggles[(int)PresetType.Custom].onValueChanged.AddListener(LoadGraphicsForCustomPreset);
         }
 
         private void LoadLanguageSettings(bool val)
@@ -129,6 +125,13 @@ namespace AppsoleutCodersLLP.SettingUI
         private void LoadGraphicsForCustomPreset(bool val)
         {
             graphicsPanel.SetActive(val);
+            resolutionSlider.SetValueWithoutNotify(0f);
+            shadowDistanceSlider.SetValueWithoutNotify(0f);
+            drawDistanceSlider.SetValueWithoutNotify(0f);
+            highShadowToggle.isOn = true;
+            antiAliasing4XToggle.isOn = true;
+            vSyncOnToggle.isOn = true;
+            reflectionOffToggle.isOn = true;
         }
 
         private void LoadGraphicsForAutomaticPreset(bool val)
@@ -141,6 +144,7 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOffToggle.isOn = true;
+            
         }
 
         private void LoadGraphicsForLowPreset(bool val)
@@ -161,6 +165,10 @@ namespace AppsoleutCodersLLP.SettingUI
             resolutionSlider.SetValueWithoutNotify(0.9f);
             shadowDistanceSlider.SetValueWithoutNotify(0.8f);
             drawDistanceSlider.SetValueWithoutNotify(0.7f);
+            highShadowToggle.isOn = true;
+            antiAliasing4XToggle.isOn = true;
+            vSyncOnToggle.isOn = true;
+            reflectionOnToggle.isOn = true;
         }
 
         private void LoadGraphicsForMediumPreset(bool val)
@@ -169,26 +177,22 @@ namespace AppsoleutCodersLLP.SettingUI
             resolutionSlider.SetValueWithoutNotify(0.5f);
             shadowDistanceSlider.SetValueWithoutNotify(0.4f);
             drawDistanceSlider.SetValueWithoutNotify(0.4f);
-            antiAliasing2XToggle.SetIsOnWithoutNotify(val);
+            midShadowToggle.isOn = true;
+            antiAliasing2XToggle.isOn = true;
+            vSyncOffToggle.isOn = true;
+            reflectionOffToggle.isOn = true;
         }
 
         private void LoadGraphicsForAdvancedPreset(bool val)
         {
             graphicsPanel.SetActive(val);
-            resolutionSlider.SetValueWithoutNotify(sliderPercentage);
+            resolutionSlider.SetValueWithoutNotify(0.7f);
             shadowDistanceSlider.SetValueWithoutNotify(0.5f);
             drawDistanceSlider.SetValueWithoutNotify(0.4f);
+            midShadowToggle.isOn = true;
+            antiAliasing4XToggle.isOn = true;
+            vSyncOnToggle.isOn = true;
+            reflectionOffToggle.isOn = true;
         }
-
-        //private void ChangeSliderValue(int changeValue)
-        //{
-        //    sliderPercentage += changeValue;
-        //    RefreshSliderValue();
-        //}
-
-        //private void RefreshSliderValue()
-        //{
-        //    sliderValue.text = "0" + sliderPercentage;
-        //}
     }
 }
