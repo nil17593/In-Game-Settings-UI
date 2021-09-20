@@ -2474,7 +2474,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 486735700}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -5121,8 +5121,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 222577302}
   - {fileID: 1672593907}
+  - {fileID: 222577302}
   - {fileID: 138694288}
   m_Father: {fileID: 1425408598}
   m_RootOrder: 3
@@ -5173,7 +5173,7 @@ MonoBehaviour:
   m_Interactable: 1
   m_TargetGraphic: {fileID: 1672593908}
   toggleTransition: 1
-  graphic: {fileID: 0}
+  graphic: {fileID: 222577303}
   m_Group: {fileID: 1425408594}
   onValueChanged:
     m_PersistentCalls:
@@ -11082,11 +11082,11 @@ MonoBehaviour:
   - {fileID: 167995037}
   - {fileID: 986809098}
   - {fileID: 317045021}
-  musicOnOffToggle: {fileID: 381778528}
-  soundOnOffToggle: {fileID: 559756058}
   handSettingsToggle:
   - {fileID: 907472028}
   - {fileID: 1997049332}
+  musicOnOffToggle: {fileID: 381778528}
+  soundOnOffToggle: {fileID: 559756058}
   doneButton: {fileID: 513392935}
 --- !u!1 &1159363235
 GameObject:
@@ -13051,6 +13051,7 @@ GameObject:
   - component: {fileID: 1315934261}
   - component: {fileID: 1315934260}
   - component: {fileID: 1315934263}
+  - component: {fileID: 1315934264}
   m_Layer: 5
   m_Name: GrphicsSettingPanel
   m_TagString: Untagged
@@ -13159,6 +13160,34 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_AllowSwitchOff: 0
+--- !u!114 &1315934264
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1315934258}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9aa7c939e9e2014a8502f0d3ae0fe39, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shadowToggles:
+  - {fileID: 1244174536}
+  - {fileID: 1757024086}
+  - {fileID: 1925063875}
+  - {fileID: 83361191}
+  antiAliasingToggles:
+  - {fileID: 1745477720}
+  - {fileID: 13734884}
+  - {fileID: 211703999}
+  vSyncToggles:
+  - {fileID: 1824241779}
+  - {fileID: 1921960101}
+  reflectionToggles: []
+  resolutionSlider: {fileID: 814070760}
+  shadowDistanceSlider: {fileID: 1774235690}
+  drawDistanceSlider: {fileID: 487218794}
 --- !u!1 &1318258678
 GameObject:
   m_ObjectHideFlags: 0
@@ -13427,7 +13456,6 @@ GameObject:
   - component: {fileID: 1355325384}
   - component: {fileID: 1355325383}
   - component: {fileID: 1355325382}
-  - component: {fileID: 1355325386}
   m_Layer: 5
   m_Name: PresetPanel
   m_TagString: Untagged
@@ -13536,31 +13564,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1355325380}
   m_CullTransparentMesh: 0
---- !u!114 &1355325386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1355325380}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9d87511515b602649b1d9a26f9301880, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  automaticGraphicsPresetToggle: {fileID: 2035347390}
-  lowGraphicsPresetToggle: {fileID: 219630640}
-  mediumGraphicsPresetToggle: {fileID: 911016526}
-  highGraphicsPresetToggle: {fileID: 863834503}
-  advancedGraphicsPresetToggle: {fileID: 2042268253}
-  customGraphicsPresetToggle: {fileID: 2087402284}
-  graphicsPanel: {fileID: 1315934258}
-  automaticGraphicsPannel: {fileID: 1315934258}
-  LowGraphicsPannel: {fileID: 1315934258}
-  mediumGraphicsPannel: {fileID: 1315934258}
-  highGraphicsPannel: {fileID: 1315934258}
-  advancedGraphicsPannel: {fileID: 1315934258}
-  customGraphicsPannel: {fileID: 1315934258}
 --- !u!1 &1361741201
 GameObject:
   m_ObjectHideFlags: 0
@@ -14898,6 +14901,7 @@ MonoBehaviour:
   - {fileID: 255728116}
   - {fileID: 648487100}
   - {fileID: 1164282961}
+  doneButton: {fileID: 513392935}
 --- !u!1 &1431016681
 GameObject:
   m_ObjectHideFlags: 0
@@ -16563,7 +16567,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 486735700}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -20121,6 +20125,8 @@ MonoBehaviour:
   languageSettingsPanel: {fileID: 1425408593}
   controlSettingsPanel: {fileID: 1059840910}
   graphicsPanel: {fileID: 1315934258}
+  doneButton: {fileID: 513392935}
+  sliderValue: {fileID: 0}
 --- !u!1 &1997049330
 GameObject:
   m_ObjectHideFlags: 0

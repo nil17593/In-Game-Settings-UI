@@ -6,6 +6,14 @@ namespace AppsoleutCodersLLP.SettingUI
 {
     public class SettingsUIManager : MonoBehaviour
     {
+        /// <summary>
+        /// all setting panels are handles in this class 
+        /// all panels are load through this class
+        /// toggles are used because we need values either true or false
+        /// loading of preset panel and preset settings panel
+        /// used arrays for different toggle group
+        /// </summary>
+        
         #region Toggles
         [Header("Settings Toggles")]
         [SerializeField] private Toggle [] settingToggles;
@@ -49,18 +57,21 @@ namespace AppsoleutCodersLLP.SettingUI
         [SerializeField] private GameObject graphicsPanel;
         #endregion
 
+        #region Buttons
+        [SerializeField]private Button doneButton;
+        #endregion
+
         #region Texts
         [Header("Texts")]
         //[Range(0,100)]
-        //[SerializeField] private TextMeshProUGUI sliderValue;
+        [SerializeField] private TextMeshProUGUI sliderValue;
         #endregion
 
-        #region Bools
-        private bool isGraphicsPanelVal;
+        #region private integers
+        private int currentSavedGraphics=0;
         #endregion
 
-        private int sliderPercentage;
-
+        //enums for settings togles types
         public enum SettingToggleType
         {
             control,
@@ -69,6 +80,7 @@ namespace AppsoleutCodersLLP.SettingUI
             privacy                       
         }
 
+        //enums for preset types
         public enum PresetType
         {
             Automatic,
@@ -87,7 +99,9 @@ namespace AppsoleutCodersLLP.SettingUI
             settingToggles[(int)SettingToggleType.language].onValueChanged.AddListener(LoadLanguageSettings);
             settingToggles[(int)SettingToggleType.control].onValueChanged.AddListener(LoadControlSettings);
 
-
+            doneButton.onClick.AddListener(OnDoneButtonClick);
+            graphicsPresetToggles[PlayerPrefs.GetInt("SavedGraphics", currentSavedGraphics)].isOn=true;
+            sliderValue = GetComponent<TextMeshProUGUI>();
 
             //load different graphics panels for different presets
             graphicsPresetToggles[(int)PresetType.Automatic].onValueChanged.AddListener(LoadGraphicsForAutomaticPreset);
@@ -98,42 +112,50 @@ namespace AppsoleutCodersLLP.SettingUI
             graphicsPresetToggles[(int)PresetType.Custom].onValueChanged.AddListener(LoadGraphicsForCustomPreset);
         }
 
+        //load language setting panel on language toggle true
         private void LoadLanguageSettings(bool val)
         {
             languageSettingsPanel.SetActive(val);        
         }
 
+        //loads control setting panel on control toggle true
         private void LoadControlSettings(bool val)
         {
             controlSettingsPanel.SetActive(val);   
         }
 
+        //loads privacy setting panel on privacy toggle true
         private void LoadPrivacySettings(bool val)
         {
             privacySettingPanel.SetActive(val);
         }
 
+        //loads graphics preset settings on preset toggle true
         private void LoadGraphicsPresetSettings(bool val)
         {
-            graphicsSettingPanel.SetActive(val);
+            graphicsSettingPanel.SetActive(val);//presets panel setActive true 
             if (val == false)
             {
-                graphicsPanel.SetActive(val);
+                graphicsPanel.SetActive(val);//preset setting panel setActive true
             }
         }
 
+        //loads custom preset settings
         private void LoadGraphicsForCustomPreset(bool val)
         {
             graphicsPanel.SetActive(val);
-            resolutionSlider.SetValueWithoutNotify(0f);
+            resolutionSlider.SetValueWithoutNotify(PlayerPrefs.GetInt("SavedGraphics",currentSavedGraphics));
             shadowDistanceSlider.SetValueWithoutNotify(0f);
             drawDistanceSlider.SetValueWithoutNotify(0f);
             highShadowToggle.isOn = true;
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOffToggle.isOn = true;
+            
+            //PlayerPrefs.SetInt("SavedGraphics", currentSavedGraphics);
         }
 
+        //loads automatic preset settings 
         private void LoadGraphicsForAutomaticPreset(bool val)
         {
             graphicsPanel.SetActive(val);
@@ -144,9 +166,10 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOffToggle.isOn = true;
-            
+            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
+        //loads low preset settings
         private void LoadGraphicsForLowPreset(bool val)
         {
             graphicsPanel.SetActive(val);
@@ -157,8 +180,10 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasingoffToggle.isOn = true;
             vSyncOffToggle.isOn = true;
             reflectionOffToggle.isOn = true;
+            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
+        //loads high graphics preset
         private void LoadGraphicsForHighPreset(bool val)
         {
             graphicsPanel.SetActive(val);
@@ -169,8 +194,10 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOnToggle.isOn = true;
+            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
+        //load medium graphics preset 
         private void LoadGraphicsForMediumPreset(bool val)
         {
             graphicsPanel.SetActive(val);
@@ -181,8 +208,10 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing2XToggle.isOn = true;
             vSyncOffToggle.isOn = true;
             reflectionOffToggle.isOn = true;
+            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
+        //load advanced graphics preset
         private void LoadGraphicsForAdvancedPreset(bool val)
         {
             graphicsPanel.SetActive(val);
@@ -193,6 +222,13 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOffToggle.isOn = true;
+            //PlayerPrefs.SetInt("SavedGraphics", 1);
+        }
+
+        //saves graphics on button click
+        private void OnDoneButtonClick()
+        {
+            PlayerPrefs.SetInt("SavedGraphics", currentSavedGraphics);
         }
     }
 }

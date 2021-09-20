@@ -7,9 +7,20 @@ namespace AppsoleutCodersLLP
 {
     public class SaveLanguageData : MonoBehaviour
     {
+        #region Toggles
+        [Header("Language Tggles")]
         [SerializeField] private Toggle [] languageSettingToggles;
-        public static int currentLanguageNumber;
+        #endregion 
 
+        #region Buttons
+        [SerializeField] private Button doneButton;
+        #endregion
+
+        #region private variables
+        private int currentLanguageNumber;
+        #endregion
+
+        //enums for language type
         public enum LanguageType
         {
             Dutch,
@@ -31,24 +42,34 @@ namespace AppsoleutCodersLLP
 
         private void Start()
         {
+            doneButton.onClick.AddListener(OnDoneButtonClick);
             languageSettingToggles[PlayerPrefs.GetInt("SavedLanguage")].isOn = true;
-            foreach (LanguageType i in Enum.GetValues(typeof(LanguageType)))
-            {
-                LanguageType language = i;
-                languageSettingToggles[(int)language].onValueChanged.AddListener((v) => OnLanguagesToggleClick(v, language));
-
-            }
-            Debug.Log(PlayerPrefs.GetInt("SavedLanguage"));
+            Debug.Log("previously Saved Language= "+PlayerPrefs.GetInt("SavedLanguage").ToString());
+            GetSelectedLanguage();
         }
 
+        //saveing language which is selected by user
         private void OnLanguagesToggleClick(bool val, LanguageType languageType)
         {
             if (val)
             {
                 currentLanguageNumber = (int)languageType;
-                PlayerPrefs.SetInt("SavedLanguage",currentLanguageNumber);
-                Debug.Log("currentLanguage " +currentLanguageNumber);
+                //PlayerPrefs.SetInt("SavedLanguage",currentLanguageNumber);
+                Debug.Log("currentLanguage= "+ (string)currentLanguageNumber.ToString());
             }
+        }
+
+        private void GetSelectedLanguage()
+        {
+            foreach (LanguageType i in Enum.GetValues(typeof(LanguageType)))
+            {
+                languageSettingToggles[(int)i].onValueChanged.AddListener((v) => OnLanguagesToggleClick(v, i));
+            }
+        }
+
+        private void OnDoneButtonClick()
+        {
+            PlayerPrefs.SetInt("SavedLanguage", currentLanguageNumber);
         }
     }
 }
