@@ -7,6 +7,9 @@ namespace AppsoleutCodersLLP
 {
     public class SaveLanguageData : MonoBehaviour
     {
+        /// <summary>
+        /// in this class language is saved
+        /// </summary>
         #region Toggles
         [Header("Language Tggles")]
         [SerializeField] private Toggle [] languageSettingToggles;

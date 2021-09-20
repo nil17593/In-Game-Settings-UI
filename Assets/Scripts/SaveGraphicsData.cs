@@ -7,6 +7,10 @@ namespace AppsoleutCodersLLP.SettingUI
 {
     public class SaveGraphicsData : MonoBehaviour
     {
+        /// <summary>
+        /// in this class graphics data is saved
+        /// used arrays for toggles
+        /// </summary>
         #region Toggles
         [Header("Shadow Toggles")]
         [SerializeField] private Toggle[] shadowToggles;

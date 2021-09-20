@@ -6,6 +6,9 @@ namespace AppsoleutCodersLLP.SettingUI
 {
     public class SaveControlToggleData : MonoBehaviour
     {
+        /// <summary>
+        /// in this class control data is saved
+        /// </summary>
         #region Toggles
         [Header("Steering Toggle")]
         [SerializeField] private Toggle[] steeringControlToggles;
