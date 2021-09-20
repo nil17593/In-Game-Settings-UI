@@ -59,6 +59,7 @@ namespace AppsoleutCodersLLP
             }
         }
 
+        //Get saved language by user
         private void GetSelectedLanguage()
         {
             foreach (LanguageType i in Enum.GetValues(typeof(LanguageType)))
@@ -67,6 +68,7 @@ namespace AppsoleutCodersLLP
             }
         }
 
+        //save selected language on done button click
         private void OnDoneButtonClick()
         {
             PlayerPrefs.SetInt("SavedLanguage", currentLanguageNumber);

@@ -61,12 +61,6 @@ namespace AppsoleutCodersLLP.SettingUI
         [SerializeField]private Button doneButton;
         #endregion
 
-        #region Texts
-        [Header("Texts")]
-        //[Range(0,100)]
-        [SerializeField] private TextMeshProUGUI sliderValue;
-        #endregion
-
         #region private integers
         private int currentSavedGraphics=0;
         #endregion
@@ -101,7 +95,6 @@ namespace AppsoleutCodersLLP.SettingUI
 
             doneButton.onClick.AddListener(OnDoneButtonClick);
             graphicsPresetToggles[PlayerPrefs.GetInt("SavedGraphics", currentSavedGraphics)].isOn=true;
-            sliderValue = GetComponent<TextMeshProUGUI>();
 
             //load different graphics panels for different presets
             graphicsPresetToggles[(int)PresetType.Automatic].onValueChanged.AddListener(LoadGraphicsForAutomaticPreset);
@@ -144,15 +137,13 @@ namespace AppsoleutCodersLLP.SettingUI
         private void LoadGraphicsForCustomPreset(bool val)
         {
             graphicsPanel.SetActive(val);
-            resolutionSlider.SetValueWithoutNotify(PlayerPrefs.GetInt("SavedGraphics",currentSavedGraphics));
+            resolutionSlider.SetValueWithoutNotify(0f);
             shadowDistanceSlider.SetValueWithoutNotify(0f);
             drawDistanceSlider.SetValueWithoutNotify(0f);
             highShadowToggle.isOn = true;
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOffToggle.isOn = true;
-            
-            //PlayerPrefs.SetInt("SavedGraphics", currentSavedGraphics);
         }
 
         //loads automatic preset settings 
@@ -166,7 +157,6 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOffToggle.isOn = true;
-            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
         //loads low preset settings
@@ -180,7 +170,6 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasingoffToggle.isOn = true;
             vSyncOffToggle.isOn = true;
             reflectionOffToggle.isOn = true;
-            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
         //loads high graphics preset
@@ -194,7 +183,6 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOnToggle.isOn = true;
-            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
         //load medium graphics preset 
@@ -208,7 +196,6 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing2XToggle.isOn = true;
             vSyncOffToggle.isOn = true;
             reflectionOffToggle.isOn = true;
-            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
         //load advanced graphics preset
@@ -222,7 +209,6 @@ namespace AppsoleutCodersLLP.SettingUI
             antiAliasing4XToggle.isOn = true;
             vSyncOnToggle.isOn = true;
             reflectionOffToggle.isOn = true;
-            //PlayerPrefs.SetInt("SavedGraphics", 1);
         }
 
         //saves graphics on button click

@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -21,6 +22,7 @@ namespace AppsoleutCodersLLP.SettingUI
         #endregion
 
         #region Sliders
+        [Header("Sliders")]
         [SerializeField] private Slider resolutionSlider;
         [SerializeField] private Slider shadowDistanceSlider;
         [SerializeField] private Slider drawDistanceSlider;
@@ -39,10 +41,12 @@ namespace AppsoleutCodersLLP.SettingUI
             SaveVsyncToggle();
             SaveReflectionToggle();
 
+            //percentageText = GetComponent<TextMeshProUGUI>();
+
             shadowToggles[PlayerPrefs.GetInt("ShadowToggleVal")].isOn = true;
             antiAliasingToggles[PlayerPrefs.GetInt("SavedAntiAliasingToggle")].isOn = true;
             vSyncToggles[PlayerPrefs.GetInt("SavedVsyncToggle")].isOn = true;
-            //reflectionToggles[PlayerPrefs.GetInt("SavedReflectionToggle")].isOn = true;
+            reflectionToggles[PlayerPrefs.GetInt("SavedReflectionToggle")].isOn = true;
 
             valueOfResolutionSlider = PlayerPrefs.GetFloat("ValuseOfResolutionSlide");
             resolutionSlider.value = valueOfResolutionSlider;
